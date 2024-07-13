@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function HeroSection() {
   return (
-    <section className="w-full mt-10 py-6 md:py-12 lg:py-16 xl:py-20 2xl:py-28">
+    <section className="w-full border-b mt-10 py-6 md:py-12 lg:py-16 xl:py-20 2xl:py-28">
       <div className="container px-4 md:px-6">
         <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
           <video
@@ -21,7 +21,7 @@ export default function HeroSection() {
               <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-blue-700">
                 Welcome to Scotty B's LEDs, where your brightest ideas shine in LED!
               </h1>
-              <p className="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-400">
+              <p className="max-w-[600px] text-white md:text-xl">
                 At Scotty B's LEDs, we're passionate about lighting up your world with custom,
                 high-quality LED signs. With a decade of expertise in the field,
                 our commitment is to turn your vision into a luminous reality.

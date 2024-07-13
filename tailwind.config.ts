@@ -1,80 +1,36 @@
-import type { Config } from "tailwindcss"
-
-const config = {
-  darkMode: ["class"],
-  content: [
-    './pages/**/*.{ts,tsx}',
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './src/**/*.{ts,tsx}',
-	],
-  prefix: "",
+module.exports = {
+  purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
+  darkMode: false,
   theme: {
-    container: {
-      center: true,
-      padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
-    },
     extend: {
       colors: {
-        border: "hsl(var(--border))",
-        input: "hsl(var(--input))",
-        ring: "hsl(var(--ring))",
-        background: "hsl(var(--background))",
-        foreground: "hsl(var(--foreground))",
-        primary: {
-          DEFAULT: "hsl(var(--primary))",
-          foreground: "hsl(var(--primary-foreground))",
-        },
-        secondary: {
-          DEFAULT: "hsl(var(--secondary))",
-          foreground: "hsl(var(--secondary-foreground))",
-        },
-        destructive: {
-          DEFAULT: "hsl(var(--destructive))",
-          foreground: "hsl(var(--destructive-foreground))",
-        },
-        muted: {
-          DEFAULT: "hsl(var(--muted))",
-          foreground: "hsl(var(--muted-foreground))",
-        },
-        accent: {
-          DEFAULT: "hsl(var(--accent))",
-          foreground: "hsl(var(--accent-foreground))",
-        },
-        popover: {
-          DEFAULT: "hsl(var(--popover))",
-          foreground: "hsl(var(--popover-foreground))",
-        },
-        card: {
-          DEFAULT: "hsl(var(--card))",
-          foreground: "hsl(var(--card-foreground))",
-        },
+        'body-bg': '#5A6AA5',
       },
-      borderRadius: {
-        lg: "var(--radius)",
-        md: "calc(var(--radius) - 2px)",
-        sm: "calc(var(--radius) - 4px)",
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(circle, #6F5AA5, #955AA5, #5A6AA5)', // custom radial gradient
+        'gradient-to-r-from-purple-400-to-blue-500': 'linear-gradient(to right, #9d4edd, #4d5bf9)', // existing linear gradient
       },
-      keyframes: {
-        "accordion-down": {
-          from: { height: "0" },
-          to: { height: "var(--radix-accordion-content-height)" },
-        },
-        "accordion-up": {
-          from: { height: "var(--radix-accordion-content-height)" },
-          to: { height: "0" },
-        },
-      },
-      animation: {
-        "accordion-down": "accordion-down 0.2s ease-out",
-        "accordion-up": "accordion-up 0.2s ease-out",
+      fontFamily: {
+        'pacifico': ['Pacifico', 'cursive'],
+        'satisfy': ['Satisfy', 'cursive'],
+        'sacramento': ['Sacramento', 'cursive'],
+        'allura': ['Allura', 'cursive'],
+        'yellowtail': ['Yellowtail', 'cursive'],
+        'tangerine': ['Tangerine', 'cursive'],
+        'cookie': ['Cookie', 'cursive'],
+        'parisienne': ['Parisienne', 'cursive'],
+        'monoton': ['Monoton', 'cursive'],
+        'righteous': ['Righteous', 'sans-serif'],
+        'lobster': ['Lobster', 'cursive'],
+        'playball': ['Playball', 'cursive'],
+        'ranchers': ['Ranchers', 'sans-serif'],
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
-} satisfies Config
-
-export default config
+  variants: {
+    extend: {},
+  },
+  plugins: [
+    require('flowbite/plugin'),
+  ],
+};

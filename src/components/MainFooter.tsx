@@ -10,55 +10,55 @@ const MainFooter = () => {
       <div className="flex flex-wrap justify-between w-full items-start gap-2 sm:gap-6 py-6 border-b border-gray-400">
         <div>
           <Image className="h-10 w-10" src={SBLEDSLogo} alt="SB LEDS Logo" width={40} height={40} />
-          <p className="font-bold py-3 text-slate-800">Scotty B's LED's</p>
-          <p className="text-gray-800">4455 Secor Road</p>
-          <p className="text-gray-800">Toledo, Ohio</p>
-          <p className="text-gray-800">Open M-F: 9:00 AM – 5:00 PM</p>
-          <p className="text-gray-800">Phone: (419)481-3567</p>
+          <p className="font-bold py-3 text-white">Scotty B's LED's</p>
+          <p className="text-white">4455 Secor Road</p>
+          <p className="text-white">Toledo, Ohio</p>
+          <p className="text-white">Open M-F: 9:00 AM – 5:00 PM</p>
+          <p className="text-white">Phone: (419)481-3567</p>
         </div>
 
         <div className="flex flex-wrap gap-x-12 gap-y-9 mt-6">
           <div className="w-full sm:w-1/2 md:w-1/4">
-            <h5 className="text-slate-800 py-3 font-bold mb-3">Professional</h5>
-            <p className="text-gray-800">
+            <h5 className="text-white py-3 font-bold mb-3">Professional</h5>
+            <p className="text-white">
               <Link href="/custom-logo" className="hover:underline">
                 Custom Business Logo
               </Link>
             </p>
-            <p className="text-gray-800">
+            <p className="text-white">
               <Link href="/custom-logo" className="hover:underline">
                 Digital Sign
               </Link>
             </p>
           </div>
           <div className="w-full sm:w-1/2 md:w-1/4">
-            <h5 className="font-bold py-3 text-slate-800 mb-3">Help</h5>
-            <p className="text-gray-800">
+            <h5 className="font-bold py-3 text-white mb-3">Help</h5>
+            <p className="text-white">
               <Link href="/shipping" className="hover:underline">
                 Shipping Policy
               </Link>
             </p>
-            <p className="text-gray-800">
+            <p className="text-white">
               <Link href="/returns" className="hover:underline">
                 Return Policy
               </Link>
             </p>
-            <p className="text-gray-800">
+            <p className="text-white">
               <Link href="/contact" className="hover:underline">
                 Contact
               </Link>
             </p>
-            <p className="text-gray-800">
+            <p className="text-white">
               <Link href="/refund" className="hover:underline">
                 Refund Policy
               </Link>
             </p>
-            <p className="text-gray-800">
+            <p className="text-white">
               <Link href="/privacy" className="hover:underline">
                 Privacy Policy
               </Link>
             </p>
-            <p className="text-gray-800">
+            <p className="text-white">
               <Link href="/terms" className="hover:underline">
                 Terms & Conditions
               </Link>
@@ -67,15 +67,15 @@ const MainFooter = () => {
         </div>
         
         <div className="md:w-1/4">
-          <h5 className="font-bold py-3 text-slate-800 mb-3">Follow us</h5>
+          <h5 className="font-bold py-3 text-white mb-3">Follow us</h5>
           <div className="flex justify-start space-x-4">
-            <a href="https://www.facebook.com/scottybleds/" target="_blank" rel="noopener noreferrer" className="text-sm">
+            <a href="https://www.facebook.com/scottybleds/" target="_blank" rel="noopener noreferrer" className="text-sm text-white">
               <FaFacebookF />
             </a>
-            <a href="https://www.instagram.com/scottybsleds/" target="_blank" rel="noopener noreferrer" className="text-sm">
+            <a href="https://www.instagram.com/scottybsleds/" target="_blank" rel="noopener noreferrer" className="text-sm text-white">
               <FaInstagram />
             </a>
-            <a href="https://www.youtube.com/watch?v=Sh6Zl7Uzm24" target="_blank" rel="noopener noreferrer" className="text-sm">
+            <a href="https://www.youtube.com/watch?v=Sh6Zl7Uzm24" target="_blank" rel="noopener noreferrer" className="text-sm text-white">
               <FaYoutube />
             </a>
           </div>
@@ -83,7 +83,7 @@ const MainFooter = () => {
       </div>
 
       <div className="text-center py-4 mt-4">
-        <p className="text-gray-800">© 2024 Scotty B's LED's. All rights reserved.</p>
+        <p className="textwhite">© 2024 Scotty B's LED's. All rights reserved.</p>
       </div>
     </footer>
   );
