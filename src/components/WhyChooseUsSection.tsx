@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function WhyChooseUsSection() {
   return (
-    <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-gray-100 dark:bg-gray-800">
+    <section className="w-full py-6 md:py-12 lg:py-16 xl:py-20 2xl:py-28 bg-gray-100 dark:bg-gray-800">
       <div className="container px-4 md:px-6">
         <div className="flex flex-col items-center justify-center space-y-4 text-center">
           <div className="space-y-2">
@@ -20,15 +20,41 @@ export default function WhyChooseUsSection() {
         <div className="flex flex-col lg:flex-row gap-9 max-w-5xl mx-auto py-12">
           <Image
             alt="unclejohns"
-            className="mx-auto max-h-[500px] max-w-[800px] overflow-hidden rounded-xl object-cover object-center lg:w-1/2"
-            src="/ScottyBsLEDpics/245398213_1300694530390420_8635895171047700084_n.jpeg"
+            className="mx-auto w-full h-auto rounded-xl object-cover object-center lg:w-1/2"
+            src="/pictures/245398213_1300694530390420_8635895171047700084_n.jpeg"
             width={800}
             height={500}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            priority
           />
+
           <div className="flex flex-col justify-center lg:w-1/2">
             <div className="flex flex-col justify-center space-y-12">
               <ul className="grid gap-8">
-                {/* List items */}
+                <li>
+                  <div className="grid gap-2">
+                    <h3 className="text-xl font-bold">Tailored to Your Taste</h3>
+                    <p className="text-gray-500 dark:text-gray-400">
+                      We specialize in creating custom designs that reflect your style and needs.
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div className="grid gap-2">
+                    <h3 className="text-xl font-bold">Unmatched Quality</h3>
+                    <p className="text-gray-500 dark:text-gray-400">
+                      Our signs are made with top-tier materials, ensuring both beauty and longevity.
+                    </p>
+                  </div>
+                </li>
+                <li>
+                  <div className="grid gap-2">
+                    <h3 className="text-xl font-bold"> Eco-Friendly Efficiency</h3>
+                    <p className="text-gray-500 dark:text-gray-400">
+                      SB's LED's are not just eye-catching; they're also energy-efficient.
+                    </p>
+                  </div>
+                </li>
               </ul>
               <div className="flex flex-col gap-2 min-[400px]:flex-row">
                 <Link
