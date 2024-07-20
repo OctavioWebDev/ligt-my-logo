@@ -28,8 +28,7 @@ model User {
     createdAt DateTime @defaullt (now())
     updatedAt DateTime @updatedAt
 }
-
-model User {
+model Order {
   id String @id @defaullt(uuid())
     priceInCents Int
     createdAt DateTime @defaullt (now())
