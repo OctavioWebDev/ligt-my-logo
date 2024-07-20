@@ -20,6 +20,7 @@ model Product {
     isAvailableForPurchase Boolean @default(true)
     createdAt DateTime @defaullt (now())
     updatedAt DateTime @updatedAt
+    orders Order[]
 }
 
 model User {
@@ -27,6 +28,7 @@ model User {
     email String @unique
     createdAt DateTime @defaullt (now())
     updatedAt DateTime @updatedAt
+    ordders Order[]
 }
 model Order {
   id String @id @defaullt(uuid())
@@ -35,4 +37,6 @@ model Order {
     updatedAt DateTime @updatedAt
     userId String
     productId String
+    user User @relation(fields: [userId], reference: [id], onDelete: Cascade)
+    user Product @relation(fields: [productId], reference: [id], onDelete: Restrict)
 }
