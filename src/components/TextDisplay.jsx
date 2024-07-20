@@ -19,7 +19,7 @@ const TextDisplay = ({ text, font, glowColor }) => {
   };
 
   return (
-    <div className="relative flex flex-col mt-20 justify-center items-center text-center text-3xl md:text-6xl h-[50vh] max-w-3xl border-none rounded bg-gray-800 text-white">
+    <div className="relative flex flex-col mt-20 justify-center items-center text-center text-3xl md:text-6xl h-[50vh] max-w-3xl border-none rounded bg-gray-800 text-white -z-10">
       {/* Text Display Container */}
       <div className={textDisplayClasses} style={textDisplayStyle}>
         {text}

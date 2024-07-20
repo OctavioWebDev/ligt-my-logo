@@ -28,10 +28,9 @@ function AboutUs() {
             <h2 className="text-center text-2xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-blue-700">What Our Customers Say</h2>
             <CustomerTestimonials />
           </section>
-          
           <section className="location-contact lg:w-1/2 order-1 lg:order-2">
-            <h2 className="text-2xl font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-blue-700">Visit or Contact Us</h2>
-            <p className="md:text-xl dark:text-gray-400">Discover the brilliance of Scotty B's LEDs firsthand. Our workshop and showroom are nestled in the heart of innovation, where every sign is a story waiting to be told. Reach out to us, schedule a visit, or let us answer any inquiries you might have:</p>
+            <h2 className="text-2xl text-right font-semibold mb-4 text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-blue-700">Visit or Contact Us</h2>
+            <p className="md:text-xl text-white">Discover the brilliance of Scotty B's LEDs firsthand. Our workshop and showroom are nestled in the heart of innovation, where every sign is a story waiting to be told. Reach out to us, schedule a visit, or let us answer any inquiries you might have:</p>
             <ul className="mt-4">
               <li><strong>Address:</strong> 4455 Secor Road Toledo, Ohio</li>
               <li><strong>Email:</strong> <a href="mailto:info@scottybleds.com">info@scottybleds.com</a></li>

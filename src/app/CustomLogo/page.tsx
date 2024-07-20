@@ -1,55 +1,101 @@
+'use client'
 import React, { useState } from 'react';
 import emailjs from '@emailjs/browser';
-import Header from '../components/Header';
-import MainFooter from '../components/MainFooter';
+import Header from '@/components/Header';
+import MainFooter from '@/components/MainFooter';
+
+type SelectionType = 'individual' | 'business' | null;
+
+interface FormState {
+  selectedType: SelectionType;
+  design: File | null;
+  projectDescription: string;
+  size: string;
+  quantity: string;
+  deadline: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  promotions: boolean;
+  smsNotifications: boolean;
+  termsAndConditions: boolean;
+}
 
 const CustomBusinessLogoForm = () => {
-  // Use the useState hook to manage form state
-  const [formState, setFormState] = useState({
-    // Initialize your form fields here
-    selectedType: null, // This will track the selection of Individual or Business
+  const [formState, setFormState] = useState<FormState>({
+    selectedType: null,
+    design: null,
+    projectDescription: '',
+    size: '',
+    quantity: '',
+    deadline: '',
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    promotions: false,
+    smsNotifications: false,
+    termsAndConditions: false,
   });
+
   const [submitStatus, setSubmitStatus] = useState({
     message: '',
     isError: false,
   });
 
-  const handleSelection = (type) => {
+  const handleSelection = (type: SelectionType) => {
     setFormState(prevState => ({ ...prevState, selectedType: type }));
   };
 
-  // Handle file upload
-  const handleFileUpload = (event) => {
-    const file = event.target.files[0];
-    console.log(file);
-    // Update form state accordingly
+  const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0] || null;
+    setFormState(prevState => ({ ...prevState, design: file }));
   };
 
-  // Handle form input changes
-  const handleChange = (event) => {
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = event.target;
     setFormState(prevState => ({ ...prevState, [name]: value }));
   };
 
-  const handleSubmit = (event) => {
+  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = event.target;
+    setFormState(prevState => ({ ...prevState, [name]: checked }));
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    setSubmitStatus({ message: '', isError: false }); // Reset status messages
+    setSubmitStatus({ message: '', isError: false });
 
     emailjs.sendForm(
-      process.env.REACT_APP_EMAILJS_SERVICE_ID,
-      process.env.REACT_APP_EMAILJS_TEMPLATE_ID,
-      event.target,
-      process.env.REACT_APP_EMAILJS_USER_ID
+      process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+      process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+      event.currentTarget,
+      process.env.NEXT_PUBLIC_EMAILJS_USER_ID!
     )
-    .then((result) => {
+      .then((result) => {
         console.log('SUCCESS!', result.text);
         setSubmitStatus({ message: 'Your request has been sent successfully!', isError: false });
-        // Optionally clear the form here if needed
-        event.target.reset();
-    }, (error) => {
+        event.currentTarget.reset();
+        setFormState({
+          selectedType: null,
+          design: null,
+          projectDescription: '',
+          size: '',
+          quantity: '',
+          deadline: '',
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          promotions: false,
+          smsNotifications: false,
+          termsAndConditions: false,
+        });
+      }, (error) => {
         console.error('FAILED...', error.text);
         setSubmitStatus({ message: 'Failed to send request. Please try again.', isError: true });
-    });
+      });
   };
 
   return (
@@ -86,9 +132,9 @@ const CustomBusinessLogoForm = () => {
             </select>
             <select name="quantity" onChange={handleChange} className="bg-gray-600 bg-opacity-50 dark:text-gray-400 border-2 p-2 rounded-md w-full" required>
               <option value="">Select Quantity*</option>
-              {[...Array(100).keys()].map((num) => (
-                <option key={num + 1} value={num + 1}>
-                  {num + 1}
+              {[...Array(100)].map((_, index) => (
+                <option key={index + 1} value={index + 1}>
+                  {index + 1}
                 </option>
               ))}
             </select>
@@ -138,10 +184,10 @@ const CustomBusinessLogoForm = () => {
           GET A FREE QUOTE
         </button>
         {submitStatus.message && (
-        <div className={submitStatus.isError ? 'text-red-500' : 'text-green-500'}>
-          {submitStatus.message}
-        </div>
-      )}
+          <div className={submitStatus.isError ? 'text-red-500' : 'text-green-500'}>
+            {submitStatus.message}
+          </div>
+        )}
       </form>
       <MainFooter />
     </div>

@@ -6,7 +6,7 @@ export default function HeroSection() {
       <div className="container px-4 md:px-6">
         <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
           <video
-            className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last lg:aspect-square"
+            className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last lg:aspect-square -z-50"
             height="550"
             width="550"
             controls

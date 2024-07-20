@@ -19,13 +19,13 @@ const HamburgerMenu = () => {
       </button>
       {isOpen && (
         <div className="absolute right-0 mt-2 w-48 bg-purple-600 shadow-lg rounded-lg z-50">
-          <Link href="/" className="block px-4 py-2 text-pink-900 hover:bg-purple-800">Home</Link>
-          <Link href="/About" className="block px-4 py-2 text-pink-900 hover:bg-purple-800">About Us</Link>
-          <Link href="/CustomLogo" className="block px-4 py-2 text-pink-900 hover:bg-purple-800">Custom Logo</Link>
-          <Link href="/CustomSign" className="block px-4 py-2 text-pink-900 hover:bg-purple-800">Express-YourSelf</Link>
-          <Link href="/Contact" className="block px-4 py-2 text-pink-900 hover:bg-purple-800">Contact</Link>
-          <Link href="/Register" className="block px-4 py-2 text-pink-900 hover:bg-purple-800">Account</Link>
-          <Link href="/Cart" className="block px-4 py-2 text-pink-900 hover:bg-purple-800">Cart</Link>
+          <Link href="/" className="block px-4 py-2 text-white hover:bg-purple-800">Home</Link>
+          <Link href="/About" className="block px-4 py-2 text-white hover:bg-purple-800">About Us</Link>
+          <Link href="/CustomLogo" className="block px-4 py-2 text-white hover:bg-purple-800">Custom Logo</Link>
+          <Link href="/CustomSign" className="block px-4 py-2 text-white hover:bg-purple-800">Express-YourSelf</Link>
+          <Link href="/Contact" className="block px-4 py-2 text-white hover:bg-purple-800">Contact</Link>
+          <Link href="/Register" className="block px-4 py-2 text-white hover:bg-purple-800">Account</Link>
+          <Link href="/Cart" className="block px-4 py-2 text-white hover:bg-purple-800">Cart</Link>
         </div>
       )}
     </div>
