@@ -2,7 +2,7 @@
 
 import { DropdownMenuItem } from "@/components/ui/dropdown-menu"
 import { useTransition } from "react"
-import { deleteOrder } from "../../_actions/orders"
+import { deleteUser } from "../../_actions/users"
 import { useRouter } from "next/navigation"
 
 export function DeleteDropDownItem({ id }: { id: string }) {
@@ -15,7 +15,7 @@ export function DeleteDropDownItem({ id }: { id: string }) {
       disabled={isPending}
       onClick={() =>
         startTransition(async () => {
-          await deleteOrder(id)
+          await deleteUser(id)
           router.refresh()
         })
       }
