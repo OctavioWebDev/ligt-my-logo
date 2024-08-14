@@ -1,52 +1,76 @@
-import React, { createContext, useState, useEffect } from 'react';
-import { loginUser } from '../services/apiService';
+import React, { createContext, useState, useContext, useEffect } from 'react';
 
-export const AuthContext = createContext();
+const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
 
-  const login = async (email, password, callback) => {
+  useEffect(() => {
+    // Check for existing token in localStorage
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsAuthenticated(true);
+      // You might want to fetch user data here
+    }
+  }, []);
+
+  const login = async (email, password) => {
     try {
-      const data = await loginUser(email, password);
-      localStorage.setItem('token', data.accessToken); // Store the access token
-      localStorage.setItem('roles', JSON.stringify(data.roles)); // Store user roles
-      setIsAuthenticated(true); // Set authentication status to true
-      setIsLoggedIn(true); // Set login status to true
-      if (callback) callback(); // Execute the callback
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        localStorage.setItem('token', data.token);
+        setIsAuthenticated(true);
+        setUser(data.user);
+      } else {
+        throw new Error(data.message);
+      }
     } catch (error) {
       console.error('Login failed:', error);
-      setIsAuthenticated(false); // Set authentication status to false
-      setIsLoggedIn(false); // Set login status to false
+      throw error;
     }
   };
 
   const logout = () => {
     localStorage.removeItem('token');
-    localStorage.removeItem('roles');
-    localStorage.removeItem('email'); // Remove the email from local storage
     setIsAuthenticated(false);
-    setIsLoggedIn(false);
+    setUser(null);
   };
 
-  useEffect(() => {
-    const token = localStorage.getItem('token');
-    if (token) {
-      setIsAuthenticated(true);
-      setIsLoggedIn(true);
+  const register = async (userData) => {
+    try {
+      const response = await fetch('/api/auth/register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(userData),
+      });
+      const data = await response.json();
+      if (response.ok) {
+        localStorage.setItem('token', data.token);
+        setIsAuthenticated(true);
+        setUser(data.user);
+      } else {
+        throw new Error(data.message);
+      }
+    } catch (error) {
+      console.error('Registration failed:', error);
+      throw error;
     }
-  }, []);
-
-  const value = {
-    isAuthenticated,
-    isLoggedIn,
-    setIsLoggedIn,
-    login,
-    logout,
   };
 
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={{ isAuthenticated, user, login, logout, register }}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
+
+export const useAuth = () => useContext(AuthContext);
+
 
 

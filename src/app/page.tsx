@@ -4,7 +4,8 @@ import DigitalSignsSection from '@/components/DigitalSignsSection';
 import CallToActionSection from '@/components/CallToActionSection';
 import Header from '@/components/Header';
 import MainFooter from '@/components/MainFooter';
-
+import BenefitsSection from '@/components/BenefitsSection';
+import FeaturesSection from '@/components/FeaturesSection';
 export default function Page() {
   return (
     <div className="flex flex-col min-h-screen">
@@ -12,6 +13,8 @@ export default function Page() {
       <main className="flex-1">
         <HeroSection />
         <WhyChooseUsSection />
+        <BenefitsSection />
+        <FeaturesSection />
         <DigitalSignsSection />
         <CallToActionSection />
       </main>

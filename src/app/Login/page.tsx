@@ -1,35 +1,32 @@
-import React, { useState, useContext } from 'react';
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { AuthContext } from '@/Context/AuthContext';
+import { useState } from 'react';
+import Link from 'next/link';
+import { useAuth } from '@/Context/AuthContext';
 
-function Login() {
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
-  const { login } = useContext(AuthContext);
+  const [errorMessage, setErrorMessage] = useState('');
+  const { login } = useAuth();
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     try {
-      console.log('API URL:', process.env.REACT_APP_BACKEND_URL);
-
-      login(email, password, () => {
-        console.log('Navigating to profile');
-        navigate('/profile');
-      }, (error) => {
-        // Handle login error
-        console.error('Login error:', error);
-        setErrorMessage(error.message || 'An error occurred. Please try again later.');
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password }),
       });
+      const data = await response.json();
+      if (response.ok) {
+        login(data.token);
+        // Instead of programmatic navigation, you can update the UI or redirect using the Link component
+      } else {
+        setErrorMessage(data.error || 'An error occurred');
+      }
     } catch (error) {
-      console.error('Login error:', error);
-      setErrorMessage(error.message || 'An error occurred. Please try again later.');
+      setErrorMessage('An error occurred. Please try again later.');
     }
   };
-
-  const [errorMessage, setErrorMessage] = useState('');
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
@@ -72,7 +69,7 @@ function Login() {
         </form>
         <p className="mt-4 text-center text-gray-600">
           Don't have an account yet?{' '}
-          <Link to="/register" className="text-purple-600 hover:text-purple-800">
+          <Link href="/register" className="text-purple-600 hover:text-purple-800">
             Register here
           </Link>
         </p>
@@ -80,5 +77,3 @@ function Login() {
     </div>
   );
 }
-
-export default Login;
