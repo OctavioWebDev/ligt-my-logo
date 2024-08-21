@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Permanent_Marker } from 'next/font/google'
-
+import Header from "@/components/Header";
+import MainFooter from "@/components/MainFooter";
 
 const permanentMarker = Permanent_Marker({
   weight: '400',
@@ -20,10 +21,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    
     <html lang="en">
+      <Header />
       <body className={permanentMarker.className}>
         {children}
       </body>
+      <MainFooter />
     </html>
   );
 }

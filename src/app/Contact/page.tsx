@@ -63,7 +63,6 @@ function Contact() {
 
   return (
     <div className="flex flex-col min-h-screen mt-16">
-      <Header />
       <div className="min-h-screen flex flex-col justify-center items-center px-4">
         <div className="bg-black bg-opacity-50 p-6 rounded-lg max-w-2xl w-full mb-10">
           <h2 className="text-3xl text-white font-semibold text-center mb-4">Contact Us</h2>
@@ -145,7 +144,6 @@ function Contact() {
             </div>
           </div>
         </div>
-        <MainFooter />
       </div>
     </div>
   );

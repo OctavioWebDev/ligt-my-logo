@@ -1,13 +1,10 @@
 import React from 'react';
-import Header from '@/components/Header';
-import MainFooter from '@/components/MainFooter';
 import PhotoCarousel from '@/components/PhotoCarousel';
 import CustomerTestimonials from '@/components/CustomerTestimonials';
 
 function AboutUs() {
   return (
     <div className="w-full mt-10 py-6 md:py-12 lg:py-16 xl:py-20 2xl:py-28">
-      <Header />
       <div className="flex-1 container mx-auto px-4 mt-16 mb-16">
         <div className="flex flex-col lg:flex-row gap-8">
           <section className="photo-carousel lg:w-1/2 order-1 lg:order-1">
@@ -39,7 +36,6 @@ function AboutUs() {
           </section>
         </div>
         </div>
-      <MainFooter />
     </div>
   );
 }

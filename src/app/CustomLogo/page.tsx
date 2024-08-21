@@ -100,7 +100,6 @@ const CustomBusinessLogoForm = () => {
 
   return (
     <div className="mt-16 container mx-auto px-4">
-      <Header />
       <h2 className="text-2xl font-bold mb-4 text-center md:text-left text-transparent bg-clip-text bg-gradient-to-r from-purple-900 to-blue-700">GET A FREE QUOTE</h2>
       <form onSubmit={handleSubmit} className="flex flex-col bg-black bg-opacity-50 p-6 rounded-lg space-y-4 md:grid md:grid-cols-2 md:gap-8">
         {/* The left column starts here */}
@@ -189,7 +188,6 @@ const CustomBusinessLogoForm = () => {
           </div>
         )}
       </form>
-      <MainFooter />
     </div>
   );
 };
