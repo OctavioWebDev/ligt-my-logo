@@ -11,7 +11,6 @@ import LocationSelector from '@/components/LocationSelector';
 import CustomSizeSelector from '@/components/CustomSizeSelector';
 import Footer from '@/components/Footer';
 import Header from '@/components/Header';
-import { useGlobalState, useGlobalDispatch } from '@/Context/GlobalState';
 import PresetSizeSelector from '@/components/PresetSizeSelector';
 import TubeColorMatcher from '@/components/TubeColorMatcher';
 
@@ -31,8 +30,6 @@ interface LEDSignBuilderToolProps {
 }
 
 function LEDSignBuilderTool({ addToCart }: LEDSignBuilderToolProps) {
-  const state = useGlobalState();
-  const dispatch = useGlobalDispatch();
   const [textInput, setTextInput] = useState('');
   const [selectedFont, setSelectedFont] = useState('Arial');
   const [selectedColor, setSelectedColor] = useState('#FF0000');
@@ -59,14 +56,14 @@ function LEDSignBuilderTool({ addToCart }: LEDSignBuilderToolProps) {
       const image = canvas.toDataURL('image/png');
 
       const selections = {
-        textInput: state.textInput,
-        selectedFont: state.selectedFont,
-        selectedColor: state.selectedColor,
-        tubeColor: state.tubeColor,
-        size: state.size,
-        backingType: state.backingType,
-        location: state.location,
-        customSize: state.customSize,
+        textInput: textInput,
+        selectedFont: selectedFont,
+        selectedColor: selectedColor,
+        tubeColor: tubeColor,
+        size: size,
+        backingType: backingType,
+        location: location,
+        customSize: customSize,
         cost: calculateCost(),
         image,
       };
@@ -75,10 +72,10 @@ function LEDSignBuilderTool({ addToCart }: LEDSignBuilderToolProps) {
   };
 
   const calculateCost = () => {
-    const totalSize = state.size.width * state.size.height;
+    const totalSize = size.width * size.height;
     const pricePerSquareInch = 0.6;
     let cost = totalSize * pricePerSquareInch;
-    if (state.location === 'outside') {
+    if (location === 'outside') {
       cost += cost * 0.10;
     }
     return cost;
