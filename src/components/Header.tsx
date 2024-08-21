@@ -26,10 +26,10 @@ const Header = () => {
         <IconLink href="/" icon={FaHouse} label="Home" />
         <Link href="/About" className="hover:underline underline-offset-4 text-purple-600 hover:text-purple-700">About Us</Link>
         <Link href="/CustomLogo" className="hover:underline underline-offset-4 text-purple-600 hover:text-purple-700">Custom Logo</Link>
-        <Link href="/CustomSign" className="hover:underline underline-offset-4 text-purple-600 hover:text-purple-700">Express-YourSelf</Link>
+        {/* <Link href="/CustomSign" className="hover:underline underline-offset-4 text-purple-600 hover:text-purple-700">Express-YourSelf</Link> */}
         <Link href="/Contact" className="hover:underline underline-offset-4 text-purple-600 hover:text-purple-700">Contact</Link>
-        <IconLink href="/Register" icon={FaUser} label="Register" />
-        <IconLink href="/Cart" icon={FaCartShopping} label="Cart" />
+        {/* <IconLink href="/Register" icon={FaUser} label="Register" /> */}
+        {/* <IconLink href="/Cart" icon={FaCartShopping} label="Cart" /> */}
       </nav>
       <div className="md:hidden">
         <HamburgerMenu />
