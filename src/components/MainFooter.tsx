@@ -21,12 +21,12 @@ const MainFooter = () => {
           <div className="w-full sm:w-1/2 md:w-1/4">
             <h5 className="text-white py-3 font-bold mb-3">Professional</h5>
             <p className="text-white">
-              <Link href="/custom-logo" className="hover:underline">
+              <Link href="/CustomLogo" className="hover:underline">
                 Custom Business Logo
               </Link>
             </p>
             <p className="text-white">
-              <Link href="/custom-logo" className="hover:underline">
+              <Link href="/CustomLogo" className="hover:underline">
                 Digital Sign
               </Link>
             </p>
@@ -34,32 +34,32 @@ const MainFooter = () => {
           <div className="w-full sm:w-1/2 md:w-1/4">
             <h5 className="font-bold py-3 text-white mb-3">Help</h5>
             <p className="text-white">
-              <Link href="/shipping" className="hover:underline">
+              <Link href="/ShippingPolicy" className="hover:underline">
                 Shipping Policy
               </Link>
             </p>
             <p className="text-white">
-              <Link href="/returns" className="hover:underline">
+              <Link href="/ReturnsPolicy" className="hover:underline">
                 Return Policy
               </Link>
             </p>
             <p className="text-white">
-              <Link href="/contact" className="hover:underline">
+              <Link href="/Contact" className="hover:underline">
                 Contact
               </Link>
             </p>
             <p className="text-white">
-              <Link href="/refund" className="hover:underline">
+              <Link href="/RefundPolicy" className="hover:underline">
                 Refund Policy
               </Link>
             </p>
             <p className="text-white">
-              <Link href="/privacy" className="hover:underline">
+              <Link href="/PrivacyPolicy" className="hover:underline">
                 Privacy Policy
               </Link>
             </p>
             <p className="text-white">
-              <Link href="/terms" className="hover:underline">
+              <Link href="/TermsAndConditions" className="hover:underline">
                 Terms & Conditions
               </Link>
             </p>
