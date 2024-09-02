@@ -124,7 +124,6 @@ function Contact() {
             </p>
           )}
         </div>
-      
         <div className="flex justify-between items-center w-full max-w-2xl mt-8">
           <div className="flex items-center">
             <span className="icon-email mr-2"></span>
@@ -133,7 +132,6 @@ function Contact() {
               <p className="text-gray-300">contact@sbleds.com</p>
             </div>
           </div>
-          
           <div className="flex items-center">
             <span className="icon-phone mr-2"></span>
             <div>
