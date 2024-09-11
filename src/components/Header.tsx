@@ -1,3 +1,4 @@
+'use client';
 import Link from 'next/link';
 import Image from 'next/image';
 import { FaHouse, FaCartShopping, FaUser } from 'react-icons/fa6';

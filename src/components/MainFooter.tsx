@@ -44,7 +44,7 @@ const MainFooter = () => {
               </Link>
             </p>
             <p className="text-white">
-              <Link href="/Contact" className="hover:underline">
+              <Link href="/CustomLogo" className="hover:underline">
                 Contact
               </Link>
             </p>

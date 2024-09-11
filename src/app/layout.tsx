@@ -23,11 +23,11 @@ export default function RootLayout({
   return (
     
     <html lang="en">
-      <Header />
       <body className={permanentMarker.className}>
+      <Header />
         {children}
-      </body>
       <MainFooter />
+      </body>
     </html>
   );
 }
