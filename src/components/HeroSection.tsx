@@ -15,7 +15,7 @@ export default function HeroSection() {
             muted={true}
             loop={false}
           >
-            <source src="/Videos/Scotty B's LED's Promo.mp4" type="video/mp4" />
+            <source src="/videos/promovideo.mp4" type="video/mp4" />
           </video>
           <div className="flex flex-col justify-center space-y-4">
             <div className="space-y-2">
