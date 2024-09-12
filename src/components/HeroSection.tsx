@@ -10,7 +10,7 @@ export default function HeroSection() {
             className="mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last lg:aspect-square -z-50"
             height="550"
             width="550"
-            controls
+            controls={true}
             autoPlay={true}
             muted={true}
             loop={true}
