@@ -9,8 +9,7 @@ const permanentMarker = Permanent_Marker({
   subsets: ['latin'],
 })
 
-
-export const metadata: Metadata = {
+export const metadata = {
   title: "Scotty B's LEDs",
   description: "Scotty B's LEDs is your one stop shop for all your digital and LED signage needs.",
 };

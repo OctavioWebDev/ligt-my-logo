@@ -20,7 +20,7 @@ const PhotoCarousel = () => {
     }, 5000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [images.length]);
 
   return (
     <div className="relative h-56 overflow-hidden rounded-lg md:h-96 -z-10">
