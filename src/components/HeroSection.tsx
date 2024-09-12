@@ -11,9 +11,9 @@ export default function HeroSection() {
             height="550"
             width="550"
             controls={true}
-            autoPlay={true}
+            autoPlay={false}
             muted={true}
-            loop={true}
+            loop={false}
           >
             <source src="/Videos/Scotty B's LED's Promo.mp4" type="video/mp4" />
           </video>
