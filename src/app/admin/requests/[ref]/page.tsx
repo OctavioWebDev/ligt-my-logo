@@ -15,6 +15,7 @@ export default async function RequestDetail({ params }: { params: { ref: string 
   if (!req) notFound();
 
   const isImage = req.imageUrl && /\.(png|jpe?g)$/i.test(new URL(req.imageUrl).pathname);
+  const fileUrl = `/admin/files/${req.ref}`;
   const details = Object.entries(req.details as Record<string, unknown>);
 
   return (
@@ -28,9 +29,9 @@ export default async function RequestDetail({ params }: { params: { ref: string 
       )}
       <p className="text-gray-300">{summarize(req)}</p>
       {req.imageUrl && (isImage
-        ? // eslint-disable-next-line @next/next/no-img-element -- admin-only view of a Blob URL
-          <img src={req.imageUrl} alt={`Design for ${req.ref}`} className="max-w-full rounded" />
-        : <a href={req.imageUrl} className="text-purple-400 underline">Download uploaded file</a>)}
+        ? // eslint-disable-next-line @next/next/no-img-element -- admin-only, auth-checked file route
+          <img src={fileUrl} alt={`Design for ${req.ref}`} className="max-w-full rounded" />
+                : <a href={fileUrl} className="text-purple-400 underline">Download uploaded file</a>)}
       <dl className="grid grid-cols-[max-content_1fr] gap-x-6 gap-y-2 text-sm">
         <dt className="text-gray-400">Name</dt><dd>{req.name}</dd>
         <dt className="text-gray-400">Email</dt><dd><a href={`mailto:${req.email}`} className="text-purple-400 underline">{req.email}</a></dd>

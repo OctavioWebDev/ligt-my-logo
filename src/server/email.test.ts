@@ -12,6 +12,12 @@ describe('renderOwnerEmail', () => {
     expect(renderOwnerEmail(signReq, 'https://x').html).toContain('https://x/admin/requests/AF-1042');
   });
 
+  it('never puts the private Blob URL in the email, and says the design is attached', () => {
+    const { html } = renderOwnerEmail(signReq, 'https://x');
+    expect(html).not.toContain('blob.example');
+    expect(html).toContain('attached');
+  });
+
   it('escapes customer-supplied text', () => {
     const { html } = renderOwnerEmail(signReq, 'https://x');
     expect(html).toContain('Ana &lt;Ruiz&gt;');
