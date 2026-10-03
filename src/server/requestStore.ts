@@ -1,8 +1,8 @@
 import type { Prisma, QuoteRequest } from '@prisma/client';
 import { prisma } from './db';
 
-export const STATUSES = ['new', 'quoted', 'won', 'lost'] as const;
-export type Status = (typeof STATUSES)[number];
+import type { Status } from '@/lib/status';
+export { STATUSES, type Status } from '@/lib/status';
 export const PAGE_SIZE = 50;
 
 export type NewRequestRow = Omit<
