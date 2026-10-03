@@ -1,0 +1,41 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DATABASE_URL_UNPOOLED")
+}
+
+model QuoteRequest {
+  id         Int      @id @default(autoincrement())
+  ref        String   @unique // "AF-1001"
+  type       String // "sign" | "logo"
+  status     String   @default("new") // new | quoted | won | lost
+  name       String
+  email      String
+  phone      String?
+  notes      String? // customer notes / project description
+  details    Json // sign spec or logo fields
+  priceCents Int? // signs only, server-computed
+  imageUrl   String? // sign preview or uploaded logo
+  adminNote  String?
+  emailError String?
+  ipHash     String // sha256(ip + secret), for rate limiting
+  viewToken  String // random; required to see the confirmation page
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@index([createdAt])
+  @@index([ipHash, createdAt])
+}
+
+// Failed admin logins, for rate limiting the login form.
+model LoginAttempt {
+  id        Int      @id @default(autoincrement())
+  ipHash    String
+  createdAt DateTime @default(now())
+
+  @@index([ipHash, createdAt])
+}
