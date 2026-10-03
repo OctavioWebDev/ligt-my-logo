@@ -14,6 +14,7 @@ CREATE TABLE "QuoteRequest" (
     "adminNote" TEXT,
     "emailError" TEXT,
     "ipHash" TEXT NOT NULL,
+    "viewToken" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 

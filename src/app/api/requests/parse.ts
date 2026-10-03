@@ -11,7 +11,7 @@ const fieldErrors = (e: ZodError) => e.flatten().fieldErrors as Record<string, s
 async function submit(req: Request, input: SubmitInput, deps: RequestDeps): Promise<Response> {
   const result = await createRequest(input, hashIp(clientIp(req.headers)), deps);
   if (!result.ok) return Response.json({ error: 'Too many requests. Please try again later.' }, { status: 429 });
-  return Response.json({ ref: result.ref });
+  return Response.json({ ref: result.ref, token: result.token });
 }
 
 function asFile(v: FormDataEntryValue | null, fallbackName: string): File | null {
@@ -21,7 +21,7 @@ function asFile(v: FormDataEntryValue | null, fallbackName: string): File | null
 
 export async function handleSign(req: Request, deps: RequestDeps): Promise<Response> {
   const form = await req.formData();
-  if (String(form.get(HONEYPOT) ?? '').trim()) return Response.json({ ref: null });
+  if (String(form.get(HONEYPOT) ?? '').trim()) return Response.json({ ref: null, token: null });
 
   let payload: unknown;
   try {
@@ -41,7 +41,7 @@ export async function handleSign(req: Request, deps: RequestDeps): Promise<Respo
 
 export async function handleLogo(req: Request, deps: RequestDeps): Promise<Response> {
   const form = await req.formData();
-  if (String(form.get(HONEYPOT) ?? '').trim()) return Response.json({ ref: null });
+  if (String(form.get(HONEYPOT) ?? '').trim()) return Response.json({ ref: null, token: null });
 
   const fields: Record<string, string> = {};
   form.forEach((v, k) => {

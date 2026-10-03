@@ -4,7 +4,7 @@ import { confirmationView, isRefFormat } from './confirmation';
 
 describe('confirmationView', () => {
   it('shows the ref, summary, price and promise for a sign', () => {
-    expect(confirmationView(signReq, 'AF-1042')).toEqual({
+    expect(confirmationView(signReq, 'AF-1042', 'secret-token')).toEqual({
       heading: 'Request AF-1042 received',
       summary: expect.stringContaining('Open Late'),
       price: '$219.60',
@@ -13,20 +13,28 @@ describe('confirmationView', () => {
   });
 
   it('has no price for a logo request', () => {
-    expect(confirmationView(logoReq, 'AF-1043').price).toBeNull();
+    expect(confirmationView(logoReq, 'AF-1043', 'secret-token').price).toBeNull();
   });
 
   it('shows a generic page for an unknown or honeypot ref', () => {
-    expect(confirmationView(null, 'AF-9999').heading).toBe('Request received');
-    expect(confirmationView(null, 'received')).toEqual({
+    expect(confirmationView(null, 'AF-9999', undefined).heading).toBe('Request received');
+    expect(confirmationView(null, 'received', undefined)).toEqual({
       heading: 'Request received', summary: null, price: null, promise: "We'll email your quote within 24 hours.",
     });
   });
 
   it('never exposes contact details', () => {
-    const view = JSON.stringify(confirmationView(signReq, 'AF-1042'));
+    const view = JSON.stringify(confirmationView(signReq, 'AF-1042', 'secret-token'));
     expect(view).not.toContain(signReq.email);
     expect(view).not.toContain(signReq.phone!);
+  });
+});
+
+describe('confirmationView token check', () => {
+  it('shows the generic page when the token is missing or wrong, so refs cannot be enumerated', () => {
+    const generic = { heading: 'Request received', summary: null, price: null, promise: "We'll email your quote within 24 hours." };
+    expect(confirmationView(signReq, 'AF-1042', undefined)).toEqual(generic);
+    expect(confirmationView(signReq, 'AF-1042', 'guess')).toEqual(generic);
   });
 });
 

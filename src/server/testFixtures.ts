@@ -23,6 +23,7 @@ export const signReq: QuoteRequest = {
   adminNote: null,
   emailError: null,
   ipHash: 'h',
+  viewToken: 'secret-token',
   createdAt: new Date('2026-10-02T12:00:00Z'),
   updatedAt: new Date('2026-10-02T12:00:00Z'),
 };

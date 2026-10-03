@@ -4,7 +4,7 @@ import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { createSubmitter } from '@/lib/createSubmitter';
-import type { SubmitResult } from '@/lib/submitResult';
+import { confirmationPath, type SubmitResult } from '@/lib/submitResult';
 import { submitLogo } from './submitLogo';
 
 const field = 'block w-full rounded-md border-2 border-gray-600 bg-gray-800/70 p-2 text-white';
@@ -21,7 +21,7 @@ export default function LogoRequestPage() {
     setPending(true);
     const r = await send(new FormData(e.currentTarget));
     if (r.ok) {
-      router.push(`/request/${r.ref ?? 'received'}`);
+      router.push(confirmationPath(r));
       return;
     }
     setResult(r);
@@ -52,7 +52,7 @@ export default function LogoRequestPage() {
             ))}
           </div>
           <label className="block text-sm text-gray-300">
-            Your logo or design (PNG, JPG, SVG or PDF, up to 10 MB)
+            Your logo or design (PNG, JPG, SVG or PDF, up to 4 MB)
             <input type="file" name="design" accept=".png,.jpg,.jpeg,.svg,.pdf" className={`${field} mt-1`} />
             {error('file')}
           </label>

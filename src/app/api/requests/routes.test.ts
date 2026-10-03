@@ -12,6 +12,7 @@ function deps(overrides: Partial<RequestDeps> = {}): RequestDeps {
     notifyOwner: vi.fn(async () => {}),
     confirmCustomer: vi.fn(async () => {}),
     now: () => new Date('2026-10-02T12:00:00Z'),
+    newToken: () => 'tok123',
     ...overrides,
   };
 }
@@ -45,14 +46,14 @@ describe('POST /api/requests/sign', () => {
   it('returns 200 with ref for a valid sign request', async () => {
     const res = await handleSign(signForm({ name: 'Ana', email: 'ana@x.com', spec }), deps());
     expect(res.status).toBe(200);
-    expect(await res.json()).toEqual({ ref: 'AF-1001' });
+    expect(await res.json()).toEqual({ ref: 'AF-1001', token: 'tok123' });
   });
 
   it('returns 200 { ref: null } and saves nothing when company_website is filled', async () => {
     const d = deps();
     const res = await handleSign(signForm({ name: 'Ana', email: 'ana@x.com', spec }, undefined, { company_website: 'spam.biz' }), d);
     expect(res.status).toBe(200);
-    expect(await res.json()).toEqual({ ref: null });
+    expect(await res.json()).toEqual({ ref: null, token: null });
     expect(d.insertRequest).not.toHaveBeenCalled();
   });
 

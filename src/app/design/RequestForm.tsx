@@ -5,7 +5,8 @@ import { useRouter } from 'next/navigation';
 import { toBlob } from 'html-to-image';
 import type { SignSpec } from '@/config/signOptions';
 import { createSubmitter } from '@/lib/createSubmitter';
-import type { SubmitResult } from '@/lib/submitResult';
+import { confirmationPath, type SubmitResult } from '@/lib/submitResult';
+import { captureAndSubmit } from './captureAndSubmit';
 import { submitSign, type ContactFields } from './submitSign';
 
 type Props = { spec: SignSpec; previewRef: RefObject<HTMLDivElement>; onClose: () => void };
@@ -21,21 +22,22 @@ export default function RequestForm({ spec, previewRef, onClose }: Props) {
 
   const send = useMemo(
     () =>
-      createSubmitter(async (c: ContactFields, hp: string): Promise<SubmitResult> => {
-        if (!previewRef.current) return { ok: false, errors: null, message: 'Preview not ready. Please try again.' };
-        const preview = await toBlob(previewRef.current, { pixelRatio: 2, cacheBust: true });
-        if (!preview) return { ok: false, errors: null, message: 'Could not capture your design. Please try again.' };
-        return submitSign({ contact: c, spec, preview, honeypot: hp });
-      }),
+      createSubmitter((c: ContactFields, hp: string): Promise<SubmitResult> =>
+        captureAndSubmit(
+          previewRef.current,
+          (node) => toBlob(node, { pixelRatio: 2, cacheBust: true }),
+          (preview) => submitSign({ contact: c, spec, preview, honeypot: hp }),
+        ),
+      ),
     [previewRef, spec],
   );
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setPending(true);
-    const r = await send(contact, honeypot);
+    const r = await send(contact, honeypot).catch((): SubmitResult => ({ ok: false, errors: null, message: 'Something went wrong. Please try again.' }));
     if (r.ok) {
-      router.push(`/request/${r.ref ?? 'received'}`);
+      router.push(confirmationPath(r));
       return;
     }
     setResult(r);

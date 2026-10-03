@@ -96,7 +96,8 @@ describe('validateUpload', () => {
     expect(validateUpload({ type: 'image/gif', size: 1000 }, 'logo')).not.toBeNull();
   });
 
-  it('rejects files over 10 MB', () => {
-    expect(validateUpload({ type: 'image/png', size: 10 * 1024 * 1024 + 1 }, 'logo')).not.toBeNull();
+  it('rejects files over 4 MB (Vercel caps request bodies at 4.5 MB)', () => {
+    expect(validateUpload({ type: 'image/png', size: 4 * 1024 * 1024 }, 'logo')).toBeNull();
+    expect(validateUpload({ type: 'image/png', size: 4 * 1024 * 1024 + 1 }, 'logo')).toBe('File must be 4 MB or smaller');
   });
 });

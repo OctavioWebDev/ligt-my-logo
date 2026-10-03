@@ -19,6 +19,7 @@ function fakeDeps(overrides: Partial<RequestDeps> = {}) {
     notifyOwner: vi.fn(async () => {}),
     confirmCustomer: vi.fn(async () => {}),
     now: () => NOW,
+    newToken: () => 'tok123',
     ...overrides,
   };
   return { deps, rows };
@@ -46,9 +47,9 @@ const signInput: SubmitInput = {
 describe('createRequest', () => {
   it('saves a valid sign request and returns its ref', async () => {
     const { deps, rows } = fakeDeps();
-    expect(await createRequest(signInput, 'iphash', deps)).toEqual({ ok: true, ref: 'AF-1001' });
+    expect(await createRequest(signInput, 'iphash', deps)).toEqual({ ok: true, ref: 'AF-1001', token: 'tok123' });
     expect(rows).toHaveLength(1);
-    expect(rows[0]).toMatchObject({ ref: 'AF-1001', type: 'sign', name: 'Ana', priceCents: 1800, ipHash: 'iphash' });
+    expect(rows[0]).toMatchObject({ ref: 'AF-1001', type: 'sign', name: 'Ana', priceCents: 1800, ipHash: 'iphash', viewToken: 'tok123' });
   });
 
   it('ignores a client-sent price', async () => {
@@ -61,7 +62,7 @@ describe('createRequest', () => {
 
   it('saves even when the owner email throws', async () => {
     const { deps, rows } = fakeDeps({ notifyOwner: vi.fn(async () => { throw new Error('Resend down'); }) });
-    expect(await createRequest(signInput, 'iphash', deps)).toEqual({ ok: true, ref: 'AF-1001' });
+    expect(await createRequest(signInput, 'iphash', deps)).toEqual({ ok: true, ref: 'AF-1001', token: 'tok123' });
     expect(rows).toHaveLength(1);
     expect(deps.setEmailError).toHaveBeenCalledWith('AF-1001', expect.stringContaining('Resend down'));
   });

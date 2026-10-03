@@ -23,6 +23,7 @@ model QuoteRequest {
   adminNote  String?
   emailError String?
   ipHash     String // sha256(ip + secret), for rate limiting
+  viewToken  String // random; required to see the confirmation page
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 

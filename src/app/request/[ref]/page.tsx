@@ -4,9 +4,9 @@ import { confirmationView, isRefFormat } from './confirmation';
 
 export const dynamic = 'force-dynamic';
 
-export default async function RequestConfirmation({ params }: { params: { ref: string } }) {
+export default async function RequestConfirmation({ params, searchParams }: { params: { ref: string }; searchParams: { t?: string } }) {
   const req = isRefFormat(params.ref) ? await getRequest(params.ref).catch(() => null) : null;
-  const view = confirmationView(req, params.ref);
+  const view = confirmationView(req, params.ref, typeof searchParams.t === 'string' ? searchParams.t : undefined);
 
   return (
     <main className="mx-auto mt-28 max-w-xl space-y-4 px-4 pb-16 text-center text-white">

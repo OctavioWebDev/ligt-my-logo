@@ -20,6 +20,6 @@ describe('submitLogo', () => {
   });
 
   it('returns ok with ref on 200', async () => {
-    expect(await submitLogo(new FormData(), reply(200, { ref: 'AF-1002' }))).toEqual({ ok: true, ref: 'AF-1002' });
+    expect(await submitLogo(new FormData(), reply(200, { ref: 'AF-1002', token: 't' }))).toEqual({ ok: true, ref: 'AF-1002', token: 't' });
   });
 });

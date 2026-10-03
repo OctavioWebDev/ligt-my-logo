@@ -26,7 +26,7 @@ describe('submitSign', () => {
   });
 
   it('returns ok with ref on 200', async () => {
-    expect(await submitSign(input, reply(200, { ref: 'AF-1001' }))).toEqual({ ok: true, ref: 'AF-1001' });
+    expect(await submitSign(input, reply(200, { ref: 'AF-1001', token: 't' }))).toEqual({ ok: true, ref: 'AF-1001', token: 't' });
   });
 
   it('returns field errors on 400', async () => {

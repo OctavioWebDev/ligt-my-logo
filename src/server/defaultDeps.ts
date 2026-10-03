@@ -1,3 +1,4 @@
+import { randomBytes } from 'node:crypto';
 import type { RequestDeps } from './createRequest';
 import { sendCustomerConfirmation, sendOwnerNotification } from './email';
 import { countRecentByIp, insertRequest, nextRef, setEmailError } from './requestStore';
@@ -12,4 +13,5 @@ export const defaultDeps: RequestDeps = {
   notifyOwner: sendOwnerNotification,
   confirmCustomer: sendCustomerConfirmation,
   now: () => new Date(),
+  newToken: () => randomBytes(16).toString('base64url'),
 };

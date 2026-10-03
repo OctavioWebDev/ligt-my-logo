@@ -13,7 +13,9 @@ import {
 
 export const MAX_SIGN_LINES = 3;
 export const MAX_SIGN_CHARS = 60;
-export const MAX_UPLOAD_BYTES = 10 * 1024 * 1024;
+// Vercel functions reject request bodies over 4.5 MB, so uploads must stay under that.
+export const MAX_UPLOAD_BYTES = 4 * 1024 * 1024;
+export const FILE_TOO_LARGE = 'File must be 4 MB or smaller';
 
 const optionalText = (max: number) =>
   z.preprocess((v) => (typeof v === 'string' && v.trim() === '' ? undefined : v), z.string().trim().max(max).optional());
@@ -79,6 +81,6 @@ export function validateUpload(file: { type: string; size: number }, kind: 'prev
   if (!(ALLOWED_TYPES[kind] as readonly string[]).includes(file.type)) {
     return kind === 'preview' ? 'Preview must be a PNG image' : 'Upload a PNG, JPG, SVG or PDF file';
   }
-  if (file.size > MAX_UPLOAD_BYTES) return 'File must be 10 MB or smaller';
+  if (file.size > MAX_UPLOAD_BYTES) return FILE_TOO_LARGE;
   return null;
 }
