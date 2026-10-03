@@ -9,9 +9,9 @@ const permanentMarker = Permanent_Marker({
   subsets: ['latin'],
 })
 
-export const metadata = {
-  title: "Scotty B's LEDs",
-  description: "Scotty B's LEDs is your one stop shop for all your digital and LED signage needs.",
+export const metadata: Metadata = {
+  title: 'AuraForm | Custom LED Neon Signs',
+  description: 'Design a custom LED neon sign and see the price instantly, or send us your logo for a free quote.',
 };
 
 export default function RootLayout({

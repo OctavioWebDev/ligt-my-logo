@@ -28,7 +28,8 @@ export default async function RequestDetail({ params }: { params: { ref: string 
       )}
       <p className="text-gray-300">{summarize(req)}</p>
       {req.imageUrl && (isImage
-        ? <img src={req.imageUrl} alt={`Design for ${req.ref}`} className="max-w-full rounded" />
+        ? // eslint-disable-next-line @next/next/no-img-element -- admin-only view of a Blob URL
+          <img src={req.imageUrl} alt={`Design for ${req.ref}`} className="max-w-full rounded" />
         : <a href={req.imageUrl} className="text-purple-400 underline">Download uploaded file</a>)}
       <dl className="grid grid-cols-[max-content_1fr] gap-x-6 gap-y-2 text-sm">
         <dt className="text-gray-400">Name</dt><dd>{req.name}</dd>
