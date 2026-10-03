@@ -2,6 +2,7 @@ import type { QuoteRequest } from '@prisma/client';
 import { Resend } from 'resend';
 import { siteConfig } from '@/config/site';
 import { formatPrice, summarize } from '@/lib/format';
+import { EXTENSIONS, readRequestFile } from './storage';
 
 const TEST_SENDER = `${siteConfig.name} <onboarding@resend.dev>`;
 
@@ -19,12 +20,9 @@ function detailRows(req: QuoteRequest): string {
     .join('');
 }
 
-function imageBlock(req: QuoteRequest): string {
+function fileNote(req: QuoteRequest): string {
   if (!req.imageUrl) return '';
-  const url = escapeHtml(req.imageUrl);
-  return /\.(png|jpe?g)$/i.test(new URL(req.imageUrl).pathname)
-    ? `<p><img src="${url}" alt="Design" style="max-width:100%;border-radius:8px"></p>`
-    : `<p><a href="${url}">Download the uploaded file</a></p>`;
+  return `<p>The ${req.type === 'sign' ? 'sign preview' : 'uploaded file'} is attached.</p>`;
 }
 
 export function renderOwnerEmail(req: QuoteRequest, adminUrl: string): { subject: string; html: string } {
@@ -36,7 +34,7 @@ export function renderOwnerEmail(req: QuoteRequest, adminUrl: string): { subject
   const html = `
     <h2>${escapeHtml(subject)}</h2>
     <p>${escapeHtml(summarize(req))}</p>
-    ${imageBlock(req)}
+    ${fileNote(req)}
     <table>
       ${row('Name', req.name)}${row('Email', req.email)}${row('Phone', req.phone)}
       ${row('Notes', req.notes)}${req.priceCents !== null ? row('Price', formatPrice(req.priceCents)) : ''}
@@ -64,8 +62,10 @@ function client(): Resend {
   return new Resend(key);
 }
 
-async function send(to: string, { subject, html }: { subject: string; html: string }, from: string): Promise<void> {
-  const { error } = await client().emails.send({ from, to, subject, html });
+type Attachment = { filename: string; content: Buffer };
+
+async function send(to: string, { subject, html }: { subject: string; html: string }, from: string, attachments?: Attachment[]): Promise<void> {
+  const { error } = await client().emails.send({ from, to, subject, html, attachments });
   if (error) throw new Error(`${error.name}: ${error.message}`);
 }
 
@@ -74,10 +74,18 @@ function adminBaseUrl(): string {
   return host ? `https://${host}` : 'http://localhost:3000';
 }
 
+async function attachmentFor(req: QuoteRequest): Promise<Attachment[] | undefined> {
+  if (!req.imageUrl) return undefined;
+  const file = await readRequestFile(req.imageUrl);
+  if (!file) return undefined;
+  const content = Buffer.from(await new Response(file.stream).arrayBuffer());
+  return [{ filename: `${req.ref}.${EXTENSIONS[file.contentType] ?? 'bin'}`, content }];
+}
+
 export async function sendOwnerNotification(req: QuoteRequest): Promise<void> {
   const to = process.env.NOTIFY_EMAIL;
   if (!to) throw new Error('NOTIFY_EMAIL is not set');
-  await send(to, renderOwnerEmail(req, adminBaseUrl()), process.env.RESEND_FROM || TEST_SENDER);
+  await send(to, renderOwnerEmail(req, adminBaseUrl()), process.env.RESEND_FROM || TEST_SENDER, await attachmentFor(req));
 }
 
 /** Customer emails need a verified sending domain, so they are off until RESEND_FROM is set. */
